@@ -150,10 +150,70 @@ function Header() {
 }
 
 function HeroSection() {
+  const [currentScreen, setCurrentScreen] = useState(0);
+  
+  const appScreens = [
+    {
+      id: "dashboard",
+      title: "Dashboard",
+      description: "Visualize seu saldo, entradas e saidas em tempo real com graficos intuitivos.",
+      imagePlaceholder: "app-screen-dashboard.png",
+      alt: "Tela do Dashboard do Trampay mostrando saldo e resumo financeiro"
+    },
+    {
+      id: "agenda",
+      title: "Agenda",
+      description: "Organize seus atendimentos e compromissos com lembretes automaticos.",
+      imagePlaceholder: "app-screen-agenda.png",
+      alt: "Tela da Agenda do Trampay com calendario de atendimentos"
+    },
+    {
+      id: "fluxo-caixa",
+      title: "Fluxo de Caixa",
+      description: "Acompanhe todas as movimentacoes financeiras do seu negocio.",
+      imagePlaceholder: "app-screen-fluxo-caixa.png",
+      alt: "Tela de Fluxo de Caixa do Trampay com entradas e saidas"
+    },
+    {
+      id: "clientes",
+      title: "Clientes",
+      description: "Cadastre e gerencie seus clientes com historico completo de servicos.",
+      imagePlaceholder: "app-screen-clientes.png",
+      alt: "Tela de Gestao de Clientes do Trampay"
+    },
+    {
+      id: "servicos",
+      title: "Servicos",
+      description: "Cadastre seus servicos com precos e tempo estimado de execucao.",
+      imagePlaceholder: "app-screen-servicos.png",
+      alt: "Tela de Cadastro de Servicos do Trampay"
+    },
+    {
+      id: "precificacao",
+      title: "Precificacao",
+      description: "Calcule o preco ideal considerando custos, tempo e margem de lucro.",
+      imagePlaceholder: "app-screen-precificacao.png",
+      alt: "Tela de Precificacao Automatica do Trampay"
+    },
+  ];
+
+  const nextScreen = () => {
+    setCurrentScreen((prev) => (prev + 1) % appScreens.length);
+  };
+
+  const prevScreen = () => {
+    setCurrentScreen((prev) => (prev - 1 + appScreens.length) % appScreens.length);
+  };
+
+  useEffect(() => {
+    const timer = setInterval(nextScreen, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <section 
       id="inicio" 
-      className="pt-24 md:pt-32 pb-16 md:pb-24 bg-gradient-to-b from-trampay-blue-light to-white overflow-hidden"
+      className="pt-24 md:pt-32 pb-16 md:pb-24 bg-gradient-to-br from-trampay-blue-light via-white to-purple-50/30 overflow-hidden"
       data-testid="section-hero"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -210,32 +270,84 @@ function HeroSection() {
           <div className="opacity-0 animate-slide-in-right relative" style={{ animationDelay: "0.4s" }}>
             <div className="relative mx-auto max-w-sm">
               <div className="absolute inset-0 bg-trampay-gold/20 rounded-[3rem] blur-3xl transform scale-110" />
-              <div 
-                className="relative bg-gradient-to-br from-white to-trampay-blue-light rounded-[2.5rem] p-4 shadow-2xl animate-float"
-                data-testid="phone-mockup"
-              >
-                <div className="bg-white rounded-[2rem] overflow-hidden aspect-[9/19] flex items-center justify-center border-8 border-gray-800 relative">
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-gray-800 rounded-b-xl" />
-                  <div className="text-center p-6">
-                    <div className="w-16 h-16 bg-trampay-gold rounded-2xl mx-auto mb-4 flex items-center justify-center">
-                      <span className="text-trampay-blue-dark font-bold text-2xl">T</span>
-                    </div>
-                    <h3 className="font-bold text-trampay-blue-dark text-lg mb-2">Dashboard</h3>
-                    <div className="bg-trampay-blue-light rounded-xl p-4 mb-3">
-                      <p className="text-2xl font-bold text-trampay-blue-dark">R$0,00</p>
-                      <p className="text-xs text-gray-500">Saldo atual</p>
-                    </div>
-                    <div className="grid grid-cols-3 gap-2">
-                      {["Agenda", "Servicos", "Clientes"].map((item) => (
-                        <div key={item} className="bg-gray-100 rounded-lg p-2">
-                          <div className="w-6 h-6 bg-trampay-gold/30 rounded mx-auto mb-1" />
-                          <p className="text-[10px] text-gray-600">{item}</p>
-                        </div>
-                      ))}
+              
+              <div className="relative">
+                <button
+                  onClick={prevScreen}
+                  className="absolute -left-4 sm:-left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-trampay-blue-dark hover:bg-trampay-gold hover:text-white transition-all duration-300"
+                  data-testid="phone-carousel-prev"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+
+                <div 
+                  className="relative bg-gradient-to-br from-white to-trampay-blue-light rounded-[2.5rem] p-3 sm:p-4 shadow-2xl animate-float"
+                  data-testid="phone-mockup"
+                >
+                  <div className="bg-white rounded-[2rem] overflow-hidden aspect-[9/19] border-8 border-gray-800 relative">
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 sm:w-24 h-5 sm:h-6 bg-gray-800 rounded-b-xl z-10" />
+                    
+                    <div className="w-full h-full overflow-hidden">
+                      <div 
+                        className="flex transition-transform duration-500 ease-in-out h-full"
+                        style={{ transform: `translateX(-${currentScreen * 100}%)` }}
+                      >
+                        {appScreens.map((screen, index) => (
+                          <div 
+                            key={screen.id} 
+                            className="min-w-full h-full flex flex-col items-center justify-center p-4 sm:p-6 bg-gradient-to-b from-white to-trampay-blue-light/30"
+                            data-testid={`phone-screen-${screen.id}`}
+                          >
+                            {/* Placeholder para imagem - substitua pelo import da imagem real */}
+                            {/* Para adicionar sua imagem: 
+                                1. Coloque a imagem em attached_assets/
+                                2. Importe no topo: import screenImage from "@assets/app-screen-dashboard.png"
+                                3. Use: <img src={screenImage} alt={screen.alt} className="w-full h-auto" />
+                            */}
+                            <div className="w-full h-32 sm:h-40 bg-gradient-to-br from-trampay-blue-light to-trampay-gold/20 rounded-xl mb-3 flex items-center justify-center border border-gray-200">
+                              <div className="text-center">
+                                <div className="w-12 h-12 bg-trampay-gold rounded-xl mx-auto mb-2 flex items-center justify-center">
+                                  <span className="text-trampay-blue-dark font-bold text-lg">T</span>
+                                </div>
+                                <p className="text-[10px] text-gray-400">Imagem: {screen.imagePlaceholder}</p>
+                              </div>
+                            </div>
+                            
+                            <h3 className="font-bold text-trampay-blue-dark text-base sm:text-lg mb-1 text-center">{screen.title}</h3>
+                            <p className="text-[10px] sm:text-xs text-gray-500 text-center leading-relaxed px-2">{screen.description}</p>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
+
+                <button
+                  onClick={nextScreen}
+                  className="absolute -right-4 sm:-right-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-trampay-blue-dark hover:bg-trampay-gold hover:text-white transition-all duration-300"
+                  data-testid="phone-carousel-next"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
               </div>
+
+              <div className="flex justify-center gap-2 mt-6">
+                {appScreens.map((screen, index) => (
+                  <button
+                    key={screen.id}
+                    onClick={() => setCurrentScreen(index)}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      index === currentScreen ? "bg-trampay-gold w-6" : "bg-gray-300 w-2"
+                    }`}
+                    data-testid={`phone-carousel-dot-${index}`}
+                    aria-label={`Ir para tela ${screen.title}`}
+                  />
+                ))}
+              </div>
+              
+              <p className="text-center text-sm text-gray-500 mt-3 font-medium">
+                {appScreens[currentScreen].title}
+              </p>
             </div>
           </div>
         </div>
@@ -246,7 +358,7 @@ function HeroSection() {
 
 function AppIntroSection() {
   return (
-    <section className="py-16 md:py-24 bg-white" data-testid="section-intro">
+    <section className="py-16 md:py-24 bg-gradient-to-br from-white via-white to-purple-50/20" data-testid="section-intro">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 opacity-0 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
@@ -465,7 +577,7 @@ function TestimonialsCarousel() {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-white" id="avaliacoes" data-testid="section-testimonials">
+    <section className="py-16 md:py-24 bg-gradient-to-br from-white via-white to-blue-50/30" id="avaliacoes" data-testid="section-testimonials">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12 italic">
           <span className="text-trampay-gold">Avaliacoes</span>
@@ -593,7 +705,7 @@ function AboutSection() {
 
 function HistorySection() {
   return (
-    <section className="py-16 md:py-24 bg-white" data-testid="section-history">
+    <section className="py-16 md:py-24 bg-gradient-to-br from-white via-white to-purple-50/20" data-testid="section-history">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-trampay-blue-dark mb-8">Nossa Historia</h2>
         <p className="text-gray-600 leading-relaxed text-lg">
@@ -941,6 +1053,41 @@ function AppCarousel() {
       title: "Modo Offline",
       description: "Use o aplicativo mesmo sem internet. Seus dados sao sincronizados automaticamente quando voce reconectar.",
     },
+    {
+      icon: Shield,
+      title: "Assistente de IA",
+      description: "Receba sugestoes inteligentes para melhorar seu negocio. A IA analisa seus dados e oferece insights personalizados.",
+    },
+    {
+      icon: TrendingUp,
+      title: "Cambio e Trading",
+      description: "Converta moedas internacionais em tempo real. Ideal para quem trabalha com clientes de outros paises.",
+    },
+    {
+      icon: Target,
+      title: "Meu Negocio",
+      description: "Tenha uma visao completa do seu empreendimento. Dashboard personalizado com metricas importantes.",
+    },
+    {
+      icon: Clock,
+      title: "Notificacoes Inteligentes",
+      description: "Receba alertas sobre pagamentos pendentes, compromissos proximos e metas a serem atingidas.",
+    },
+    {
+      icon: Users,
+      title: "Gerenciamento de Equipe",
+      description: "Gerencie colaboradores, defina permissoes e acompanhe o desempenho de cada membro da sua equipe.",
+    },
+    {
+      icon: TrendingUp,
+      title: "Relatorios Detalhados",
+      description: "Gere relatorios completos sobre financas, servicos e clientes para tomar decisoes mais assertivas.",
+    },
+    {
+      icon: Zap,
+      title: "Simulador de Taxas",
+      description: "Simule taxas e tarifas para entender quanto realmente entra no seu bolso apos descontos.",
+    },
   ];
 
   const nextSlide = () => {
@@ -957,7 +1104,7 @@ function AppCarousel() {
   }, []);
 
   return (
-    <section className="py-16 md:py-24 bg-white" data-testid="section-app-carousel">
+    <section className="py-16 md:py-24 bg-gradient-to-br from-white via-white to-blue-50/30" data-testid="section-app-carousel">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-trampay-blue-dark mb-12">
           Conheca as funcionalidades
