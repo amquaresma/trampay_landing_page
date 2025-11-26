@@ -3,7 +3,7 @@
   "outputDirectory": "dist",
   "functions": {
     "server/**/*.ts": {
-      "runtime": "nodejs18.x"
+      "runtime": "nodejs18.1"
     }
   }
 }
