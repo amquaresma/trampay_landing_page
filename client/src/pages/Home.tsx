@@ -72,17 +72,20 @@ function Header() {
             <span className="text-xl font-bold text-trampay-blue-dark">Trampay</span>
           </div>
 
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-6">
             {[
-              { id: "inicio", label: "Inicio" },
+              { id: "inicio", label: "Início" },
+              { id: "app-features", label: "Funcionalidades" },
+              { id: "precos", label: "Preços" },
+              { id: "avaliacoes", label: "Avaliações" },
               { id: "sobre", label: "Sobre" },
               { id: "contato", label: "Contato" },
-              { id: "duvidas", label: "Duvidas" },
+              { id: "duvidas", label: "Dúvidas" },
             ].map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="text-trampay-blue-dark font-medium hover:text-trampay-gold transition-colors relative group"
+                className="text-trampay-blue-dark font-medium hover:text-trampay-gold transition-colors relative group text-sm"
                 data-testid={`nav-${item.id}`}
               >
                 {item.label}
@@ -115,12 +118,15 @@ function Header() {
 
         {isMobileMenuOpen && (
           <div className="md:hidden bg-white border-t border-gray-100 py-4 animate-fade-in">
-            <nav className="flex flex-col gap-4">
+            <nav className="flex flex-col gap-2">
               {[
-                { id: "inicio", label: "Inicio" },
+                { id: "inicio", label: "Início" },
+                { id: "app-features", label: "Funcionalidades" },
+                { id: "precos", label: "Preços" },
+                { id: "avaliacoes", label: "Avaliações" },
                 { id: "sobre", label: "Sobre" },
                 { id: "contato", label: "Contato" },
-                { id: "duvidas", label: "Duvidas" },
+                { id: "duvidas", label: "Dúvidas" },
               ].map((item) => (
                 <button
                   key={item.id}
