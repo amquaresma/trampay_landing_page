@@ -5,7 +5,7 @@ Uma página de desembarque moderna e responsiva para o **Trampay**, aplicativo d
 ## ✨ Funcionalidades Principais
 
 ### 🎯 Seções da Landing Page
-- **Header**: Navegação fixa e responsiva com smooth scroll
+- **Header**: Navegação fixa e responsiva com smooth scroll.
 - **Hero Section**: Carrossel interativo com telas do app (Dashboard, Agenda, Fluxo de Caixa, Clientes, Serviços, Precificação)
 - **Introdução do App**: Visão geral da solução Trampay
 - **Carrossel de Funcionalidades**: 12 funcionalidades principais com ícones e descrições
