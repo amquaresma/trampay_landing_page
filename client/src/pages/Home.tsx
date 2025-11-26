@@ -364,7 +364,7 @@ function HeroSection() {
 
 function AppIntroSection() {
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-br from-white via-white to-purple-50/20" data-testid="section-intro">
+    <section id="app-features" className="py-16 md:py-24 bg-gradient-to-br from-white via-white to-purple-50/20" data-testid="section-intro">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 opacity-0 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
@@ -476,7 +476,7 @@ function PricingSection() {
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-trampay-blue-light" data-testid="section-pricing">
+    <section id="precos" className="py-16 md:py-24 bg-trampay-blue-light" data-testid="section-pricing">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-trampay-blue-dark mb-12 opacity-0 animate-fade-in-up">
           Compare nossos planos
