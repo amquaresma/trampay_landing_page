@@ -228,9 +228,54 @@ Enviar mensagem via formulário de contato.
 
 ## 🌐 Deploy
 
+### Deploy no Vercel (Recomendado)
+
+O projeto está totalmente configurado para Vercel com `vercel.json`.
+
+#### Passo a Passo:
+
+1. **Crie uma conta no Vercel**
+   - Acesse [vercel.com](https://vercel.com)
+   - Registre-se com GitHub, GitLab ou Bitbucket
+
+2. **Faça push do seu projeto para um repositório Git**
+   ```bash
+   git init
+   git add .
+   git commit -m "Trampay landing page"
+   git remote add origin https://github.com/seu-usuario/trampay.git
+   git branch -M main
+   git push -u origin main
+   ```
+
+3. **Conecte o repositório ao Vercel**
+   - No Vercel dashboard, clique em "New Project"
+   - Selecione seu repositório Git
+   - Clique em "Import"
+
+4. **Configure as variáveis de ambiente**
+   - Na aba "Environment Variables", adicione:
+     ```
+     EMAIL_USER=seu-email@gmail.com
+     EMAIL_PASS=sua-senha-de-app-do-gmail
+     NODE_ENV=production
+     ```
+   - Clique em "Deploy"
+
+5. **Pronto! 🎉**
+   - Seu site estará em `https://seu-projeto.vercel.app`
+   - Cada push para `main` gera um novo deploy automático
+
+#### Configurar Domínio Customizado
+
+No Vercel dashboard do seu projeto:
+1. Vá para "Settings" → "Domains"
+2. Adicione seu domínio personalizado
+3. Configure o DNS conforme instruções fornecidas
+
 ### Deploy no Replit
 
-O projeto está configurado para rodar no Replit:
+O projeto também está configurado para rodar no Replit:
 
 1. Clique em **"Publish"** no topo do seu Replit
 2. Escolha o tipo de deployment desejado
@@ -238,9 +283,9 @@ O projeto está configurado para rodar no Replit:
 
 Para domínio customizado, acesse as configurações do Replit e siga as instruções.
 
-### Deploy Alternativo
+### Deploy em Outro Servidor
 
-Para deployar em outro servidor:
+Para deployar em outro servidor (AWS, DigitalOcean, etc.):
 
 1. Gere as variáveis de ambiente necessárias
 2. Execute `npm run build`

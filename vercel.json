@@ -1,0 +1,10 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "envPrefix": "VITE_",
+  "functions": {
+    "server/**/*.ts": {
+      "runtime": "nodejs18.x"
+    }
+  }
+}
